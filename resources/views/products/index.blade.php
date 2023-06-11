@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb topo">
         <div class="pull-left">
-            <h2>Bem Vindo a Tela Inicial do Sistema</h2>
+           <a href="{{ route('products.index') }}"><h2>Bem Vindo a Tela Inicial do Sistema</h2></a> 
         </div>
 
 
@@ -24,14 +24,14 @@
 
 
 
-
+<form action="{{ route('products.index') }}" method="GET">
 <div class="hstack gap-3">
-  <input class="form-control me-auto" type="text" placeholder="Procure pelo nome do produto ou seu codigo" aria-label="Procure pelo nome do produto ou seu codigo">
-  <button type="button" class="btn btn-success">Buscar</button>
+  <input class="form-control me-auto" type="text" name="search" id="search" placeholder="Procure pelo nome do produto ou seu codigo" aria-label="Procure pelo nome do produto ou seu codigo">
+  <button type="submit" class="btn btn-success">Buscar</button>
   <div class="vr"></div>
   
 </div>
-
+</form>
 
 <table class="table table-bordered tabela">
     <tr>

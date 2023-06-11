@@ -31,4 +31,6 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('products', [AuthController::class, 'products']);
     Route::resource('products', ProductsContoller::class);
+    Route::get('products/search', [ProductsController::class, 'index'])->name('products.search');
+
 });

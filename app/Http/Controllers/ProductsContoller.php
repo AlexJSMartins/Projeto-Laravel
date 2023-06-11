@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+
 
 class ProductsContoller extends Controller
 {
@@ -12,13 +14,26 @@ class ProductsContoller extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request):View
     {
-        $products = Product::latest()->paginate(10);
+        $search = $request->input('search');
+
+        if ($search) {
+            $products = Product::query()
+                ->where('nome', 'like', "%{$search}%")
+                ->orWhere('codigo', $search)
+                ->paginate(10)
+                ->appends(['search' => $search]);
+        } else {
+            $products = Product::latest()
+                ->paginate(10);
+        }
 
         return view('products.index', compact('products'))
-        ->with('i', (request()->input('page',1) - 1) *10);
+            ->with('i', ($products->currentPage() - 1) * $products->perPage());
     }
 
     /**
@@ -114,4 +129,6 @@ class ProductsContoller extends Controller
         return redirect()->route('products.index')
                         ->with('sucesso','Produto deletado com sucesso');
     }
+
+    
 }
