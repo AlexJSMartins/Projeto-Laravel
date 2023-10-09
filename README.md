@@ -6,6 +6,6 @@
 
 Esse projeto inicialmente é um sistema de cadastro de produtos usando a estrutura Laravel com bootstrap.
 
-Sistema ainda em revolução.
+Sistema ainda em evolução.
 
 
